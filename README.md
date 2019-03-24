@@ -1,1 +1,2 @@
-# Pemrograman Jaringan E - 05111640000015
+# Pemrograman Jaringan E
+Navinda Meutia - 05111640000015

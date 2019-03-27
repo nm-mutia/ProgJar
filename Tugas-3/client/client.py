@@ -22,7 +22,6 @@ def minta():
                 print namafile
                 sock.send("OK")
                 fp = open('new_'+namafile, 'wb')
-                #os.makedirs(os.path.dirname('new_'+namafile), exist_ok=True)
                 data = sock.recv(1024)
                 total = len(data)
                 fp.write(data)
@@ -57,7 +56,7 @@ def kirim():
 if __name__ == '__main__':
     while True:
         inp = raw_input("1.Download file 2.Upload File \n")
-        sock.sendto(inp, (TARGET_IP, TARGET_PORT))
+        #sock.send(inp)
         if int(inp) == 1:
             minta()
         elif int(inp) == 2:

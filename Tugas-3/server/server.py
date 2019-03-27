@@ -25,7 +25,7 @@ def FileAsk(name, socks):
                     socks.send(k)
     else:
         socks.send("ERR ")
-    socks.close()
+    #socks.close()
 
 def Receive(name, socks):
     namafile = socks.recv(1024)
@@ -49,15 +49,16 @@ def Receive(name, socks):
         socks.send("ERR")
 
 while True:
-    #conn, addr = socks.accept()
-    conn, addr = socks.recvfrom(1024)
+    conn, addr = socks.accept()
     print "Client connect " + str(addr)
-    if conn.startswith('1'):
-        thread = threading.Thread(target=FileAsk, args=("thread", conn))
-        thread.start()
-    elif conn.startswith('2'):
-        thread = threading.Thread(target=Receive, args=("thread", conn))
-        thread.start()
+    #print conn
+    #con = socks.recv(1024)
+    #if con[:0]=='1':
+    thread = threading.Thread(target=FileAsk, args=("thread", conn))
+    thread.start()
+    #elif con[:0]=='2':
+    #   thread = threading.Thread(target=Receive, args=("thread", conn))
+    #    thread.start()
 
-socks.close()
+#socks.close()
 

@@ -9,10 +9,10 @@ sock.connect((TARGET_IP, TARGET_PORT))
 
 def minta():
     namafile = raw_input("File name? -> ")
-    if namafile[:4] == 'list':  # digunakan untuk list isi directory / folder
-        datas = sock.recv(1024)
-        print "directory: \n" + str(datas)
-    elif namafile != 'q':
+    #if namafile[:4] == 'list':  # digunakan untuk list isi directory / folder
+    #    datas = sock.recv(1024)
+    #    print "directory: \n" + str(datas)
+    if namafile != 'q':
         sock.send(namafile)
         data = sock.recv(1024)
         if data.startswith("ADA"):

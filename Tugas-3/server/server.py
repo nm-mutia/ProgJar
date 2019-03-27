@@ -13,6 +13,13 @@ print "Server start"
 
 def FileAsk(name, socks):
     namafile = socks.recv(1024)
+    #if namafile[:4] == 'list':
+    #    print "print directory list"
+    #    print "directory path: " + namafile[5:]
+    #    fl = os.listdir(namafile[5:])
+    #    print fl
+    #    socks.send(str(fl))
+
     if os.path.isfile(namafile):
         socks.send("ADA " + str(os.path.getsize(namafile)))
         resp = socks.recv(1024)

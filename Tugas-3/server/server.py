@@ -12,27 +12,28 @@ socks.listen(5)
 print "Server start"
 
 def FileAsk(name, socks):
-    namafile = socks.recv(1024)
-    #if namafile[:4] == 'list':
-    #    print "print directory list"
-    #    print "directory path: " + namafile[5:]
-    #    fl = os.listdir(namafile[5:])
-    #    print fl
-    #    socks.send(str(fl))
+    while True:
+        namafile = socks.recv(1024)
+        #if namafile[:4] == 'list':
+        #    print "print directory list"
+        #    print "directory path: " + namafile[5:]
+        #    fl = os.listdir(namafile[5:])
+        #    print fl
+        #    socks.send(str(fl))
 
-    if os.path.isfile(namafile):
-        socks.send("ADA " + str(os.path.getsize(namafile)))
-        resp = socks.recv(1024)
-        if resp.startswith("OK"):
-            with open(namafile, 'rb') as fp:
-                k = fp.read(1024)
-                socks.send(k)
-                while k != "":
+        if os.path.isfile(namafile):
+            socks.send("ADA " + str(os.path.getsize(namafile)))
+            resp = socks.recv(1024)
+            if resp.startswith("OK"):
+                with open(namafile, 'rb') as fp:
                     k = fp.read(1024)
                     socks.send(k)
-    else:
-        socks.send("ERR ")
-    #socks.close()
+                    while k != "":
+                        k = fp.read(1024)
+                        socks.send(k)
+        else:
+            socks.send("ERR ")
+        #socks.close()
 
 def Receive(name, socks):
     namafile = socks.recv(1024)
